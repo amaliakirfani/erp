@@ -20,7 +20,7 @@ class CodeRepo
         }
         else{
             $code = $code->get()[0];
-            $code = explode("MDIV", $code->kode_barang);
+            $code = explode("MDIV", $code->kode_divisi);
 
             $code = (int)($code[1]+1);
             $code = 'MDIV'.sprintf('%05d', $code);
