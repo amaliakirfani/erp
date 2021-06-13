@@ -7,6 +7,7 @@
     <title> ERP | @yield('title')</title>
 
     @include("layouts.global_css")
+    @include('layouts.components.loader')
     @stack('css')
 </head>
 

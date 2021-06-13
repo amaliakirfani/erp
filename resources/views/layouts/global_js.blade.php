@@ -23,6 +23,14 @@
         })
     }
 
+    function loader() {
+        $('#loader').modal('show')
+        return
+    }
+
+    function unloader() {
+        return $("#loader").modal("hide");
+    }
 
     function SuccessResponse(message, callback = null) {
         Swal.fire({

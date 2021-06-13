@@ -11,7 +11,8 @@
                         <h4 class="card-title">{{$title}}</h4>
                     </div>
                     <div class="card-body">
-                        <button onclick="openModalAdd()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add">
+                        <button onclick="openModalAdd()" type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#modal-add">
                             Tambah
                         </button>
                     </div>
@@ -40,12 +41,14 @@
     </section>
 
     @include("pages.master.divisi.components.modal-add")
+    @include("pages.master.divisi.components.modal-edit")
 @endsection
 
 @push("js")
     @include('layouts.plugins.datatables')
     <script>
-        openModalAdd = () =>{
+
+        openModalAdd = () => {
             $('#modal-add').modal('show')
         }
 
@@ -87,7 +90,7 @@
                     render: function (data, type, row, meta) {
                         var button = `
 
-                    <button onclick="detailData('` + row.id + `')" class="btn btn-sm btn-warning">
+                    <button onclick="editData('` + row.id + `')" class="btn btn-sm btn-warning">
                     <i class="fa fa-edit"></i>
                     Edit</button>
                     <button onclick="deleteData('` + row.id + `')" class="btn btn-sm btn-danger">
@@ -98,5 +101,35 @@
                     }
                 },],
         });
+
+        deleteData = (id) => {
+            Swal.fire({
+                title: 'Apakah Anda Yakin Ingin Menghapus Data Ini ?',
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return $.ajax({
+                        url: "/master/divisi/delete/" + id + "/json",
+                    }).then((res) => {
+                        return res.json()
+                    }).catch((err) => {
+                        return InternalServerEror()
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (result.value.code == 2200) {
+                        SuccessResponse(res.message)
+                        table.draw()
+                        return
+                    } else {
+                        return BadResponse(res.message)
+                    }
+                }
+            })
+        }
     </script>
 @endpush
