@@ -26,6 +26,9 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function 
             Route::get('/', 'DivisiController@index');
             Route::get('/json', 'DivisiController@indexJson');
             Route::post('/create/json', 'DivisiController@createJson');
+            Route::get('/edit/{id}/json', 'DivisiController@editJson');
+            Route::post('/update/json', 'DivisiController@updateJson');
+            Route::get('/delete/{id}/json', 'DivisiController@deleteJson');
         });
     });
 });

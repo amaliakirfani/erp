@@ -63,4 +63,57 @@ class DivisiController extends Controller
             ]);
         }
     }
+
+    function editJson($id)
+    {
+        try {
+            $data = Divisi::where("id", $id)->first();
+            return response()->json([
+                "code" => 2200,
+                "message" => 'success',
+                'data' => $data
+            ]);
+        } catch (\Throwable $err) {
+            return response()->json([
+                "code" => 5500,
+                "message" => $err->getMessage()
+            ]);
+        }
+    }
+
+    function updateJson(Request $request)
+    {
+        try {
+            $data = $request->except(["_token", "id"]);
+
+            Divisi::where("id", $request->id)->update($data);
+
+            return response()->json([
+                "code" => 2200,
+                "message" => "Berhasil Update Data"
+            ]);
+        } catch (\Throwable $err) {
+            return response()->json([
+                "code" => 5500,
+                "message" => $err->getMessage()
+            ]);
+        }
+    }
+
+    function deleteJson($id)
+    {
+        try {
+            Divisi::where("id", $id)->delete();
+
+            return response()->json([
+                "code" => 2200,
+                "message" => "Berhasil Delete Data"
+            ]);
+        } catch (\Throwable $err) {
+            return response()->json([
+                "code" => 5500,
+                "message" => $err->getMessage()
+            ]);
+        }
+    }
 }
