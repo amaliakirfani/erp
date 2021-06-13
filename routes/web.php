@@ -20,4 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function () {
     Route::get("/", 'HomeController@index');
+
+    Route::group(['prefix' => '/master','namespace' => 'Master'], function () {
+        Route::group(['prefix' => '/divisi'], function () {
+            Route::get('/', 'DivisiController@index');
+            Route::get('/json', 'DivisiController@indexJson');
+            Route::post('/create/json', 'DivisiController@createJson');
+        });
+    });
 });

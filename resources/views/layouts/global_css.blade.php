@@ -8,3 +8,12 @@
 <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
 <link rel="stylesheet" href="/assets/css/app.css">
 <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+
+{{--Plugins--}}
+<link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.css">
+
+<style>
+    invalid-feedback{
+        color: #dc3545;
+    }
+</style>

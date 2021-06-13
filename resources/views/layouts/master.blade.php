@@ -36,6 +36,23 @@
         </header>
 
         <div class="page-heading">
+            @if(session('error') || session('success'))
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-{{ session('error') ? 'danger' : 'success' }} alert-dismissible fade show"
+                             role="alert">
+                            @if (session('error'))
+                                <strong>Error!</strong> {!! session('error') !!}
+                            @elseif (session('success'))
+                                <strong>Berhasil!</strong> {!! session('success') !!}
+                            @endif
+{{--                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span>--}}
+{{--                            </button>--}}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <h3>@yield("page-heading")</h3>
         </div>
         <div class="page-content">
