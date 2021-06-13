@@ -18,6 +18,9 @@
                 <li class="submenu-item ">
                     <a href="/master/divisi">Divisi</a>
                 </li>
+                <li class="submenu-item ">
+                    <a href="/master/jabatan">Jabatan</a>
+                </li>
             </ul>
         </li>
 

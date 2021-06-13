@@ -27,5 +27,11 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function 
             Route::get('/json', 'DivisiController@indexJson');
             Route::post('/create/json', 'DivisiController@createJson');
         });
+
+        Route::group(['prefix' => '/jabatan'], function () {
+            Route::get('/', 'JabatanController@index');
+            Route::get('/json', 'JabatanController@indexJson');
+            Route::post('/create/json', 'JabatanController@createJson');
+        });
     });
 });
