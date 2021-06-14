@@ -113,7 +113,7 @@
                     return $.ajax({
                         url: "/master/divisi/delete/" + id + "/json",
                     }).then((res) => {
-                        return res.json()
+                        return res
                     }).catch((err) => {
                         return InternalServerEror()
                     })
@@ -122,11 +122,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     if (result.value.code == 2200) {
-                        SuccessResponse(res.message)
+                        SuccessResponse(result.value.message)
                         table.draw()
                         return
                     } else {
-                        return BadResponse(res.message)
+                        return BadResponse(result.value.message)
                     }
                 }
             })
