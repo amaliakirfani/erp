@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah {{$title}}</h5>
+                <h5 class="modal-title">Edit {{$title}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,11 +14,29 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="col-form-label">Kode</label>
-                            <input autocomplete="off" placeholder="Kode" type="text" readonly class="form-control" name="kode_divisi"/>
+                            <input autocomplete="off" placeholder="Kode" type="text" readonly class="form-control" name="employee_code"/>
                         </div>
                         <div class="col-sm-12">
                             <label class="col-form-label">Nama</label>
-                            <input autocomplete="off" placeholder="Nama" type="text" class="form-control" name="name"/>
+                            <input autocomplete="off" placeholder="Nama" type="text" class="form-control" name="employee_name"/>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Jabatan</label>
+                                <select name="position_id" class="form-control">
+                                    <option>--pilih--</option>
+                                        @foreach ($jabatan as $item)
+                                      <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Divisi</label>
+                                <select name="division_id" class="form-control">
+                                    <option>--pilih--</option>
+                                        @foreach ($divisi as $item)
+                                      <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                </select>
                         </div>
                     </div>
                 </form>
@@ -35,7 +53,7 @@
     <script>
         editData = (id) => {
             $.ajax({
-                url: "/master/divisi/edit/" + id + "/json",
+                url: "/master/karyawan/edit/" + id + "/json",
                 beforeSend: () => {
 
                 }
@@ -43,8 +61,9 @@
                 if (res.code == 2200) {
                     $('#modal-edit').modal('show')
                     $("input[name='id']").val(res.data.id)
-                    $("input[name='kode_divisi']").val(res.data.kode_divisi)
-                    $("input[name='name']").val(res.data.name)
+                    $("input[name='employee_code']").val(res.data.employee_code)
+                    $("input[name='employee_name']").val(res.data.employee_name)
+                    $("input[name='jabatan_name']").val(res.data.jabatan_name)
                 } else {
                     return BadResponse(res.message)
                 }
@@ -66,7 +85,7 @@
             submitHandler: function (form, e) {
                 e.preventDefault()
                 $.ajax({
-                    url: "/master/divisi/update/json",
+                    url: "/master/karyawan/update/json",
                     method: "POST",
                     data: $('#form-edit').serialize(),
                     beforeSend: function () {

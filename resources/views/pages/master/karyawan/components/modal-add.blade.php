@@ -1,4 +1,4 @@
-<div class="modal" id="modal-edit" tabindex="-1" role="dialog">
+<div class="modal" id="modal-add" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,53 +8,44 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-edit">
+                <form id="form-input">
                     @csrf
-                    <input name="id" type="hidden">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="col-form-label">Kode</label>
-                            <input autocomplete="off" placeholder="Kode" type="text" readonly class="form-control" name="kode_divisi"/>
+                            <label class="col-form-label">Nama</label>
+                            <input autocomplete="off" placeholder="Nama" type="text" class="form-control" name="employee_name"/>
                         </div>
                         <div class="col-sm-12">
-                            <label class="col-form-label">Nama</label>
-                            <input autocomplete="off" placeholder="Nama" type="text" class="form-control" name="name"/>
+                            <label class="col-form-label">Jabatan</label>
+                                <select name="position_id" class="form-control">
+                                    <option>--pilih--</option>
+                                        @foreach ($jabatan as $item)
+                                      <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Divisi</label>
+                                <select name="division_id" class="form-control">
+                                    <option>--pilih--</option>
+                                        @foreach ($divisi as $item)
+                                      <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                </select>
                         </div>
                     </div>
                 </form>
             </div>
             <div style="border-top: 0px" class="modal-footer">
-                <button type="submit" form="form-edit" class="btn-submit btn btn-primary">Simpan</button>
+                <button type="submit" form="form-input" class="btn-submit btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
 </div>
 
-
 @push("js")
     <script>
-        editData = (id) => {
-            $.ajax({
-                url: "/master/divisi/edit/" + id + "/json",
-                beforeSend: () => {
-
-                }
-            }).then((res) => {
-                if (res.code == 2200) {
-                    $('#modal-edit').modal('show')
-                    $("input[name='id']").val(res.data.id)
-                    $("input[name='kode_divisi']").val(res.data.kode_divisi)
-                    $("input[name='name']").val(res.data.name)
-                } else {
-                    return BadResponse(res.message)
-                }
-            }).catch((err) => {
-                return InternalServerEror()
-            }).always(() => {
-                unloader()
-            })
-        }
-        var form = $("#form-edit").validate({
+        var form = $("#form-input").validate({
             errorClass: "is-invalid",
             errorElement: 'invalid-feedback',
             ignore: [],
@@ -66,15 +57,15 @@
             submitHandler: function (form, e) {
                 e.preventDefault()
                 $.ajax({
-                    url: "/master/divisi/update/json",
+                    url: "/master/karyawan/create/json",
                     method: "POST",
-                    data: $('#form-edit').serialize(),
+                    data: $('#form-input').serialize(),
                     beforeSend: function () {
                         LoaderSubmit()
                     }
                 }).then(res => {
                     if (res.code == 2200) {
-                        $('#modal-edit').modal('hide')
+                        $('#modal-add').modal('hide')
                         table.draw()
                         return SuccessResponse(res.message)
                     } else {
@@ -94,4 +85,3 @@
         });
     </script>
 @endpush
-

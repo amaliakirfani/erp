@@ -11,7 +11,8 @@
                         <h4 class="card-title">{{$title}}</h4>
                     </div>
                     <div class="card-body">
-                        <button onclick="openModalAdd()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add">
+                        <button onclick="openModalAdd()" type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#modal-add">
                             Tambah
                         </button>
                     </div>
@@ -24,6 +25,8 @@
                                         <th>No</th>
                                         <th>Kode</th>
                                         <th>Nama</th>
+                                        <th>Jabatan</th>
+                                        <th>Divisi</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -39,14 +42,15 @@
         </div>
     </section>
 
-    @include("pages.master.jabatan.components.modal-add")
-    @include("pages.master.jabatan.components.modal-edit")
+    @include("pages.master.karyawan.components.modal-add")
+    @include("pages.master.karyawan.components.modal-edit")
 @endsection
 
 @push("js")
     @include('layouts.plugins.datatables')
     <script>
-        openModalAdd = () =>{
+
+        openModalAdd = () => {
             $('#modal-add').modal('show')
         }
 
@@ -56,7 +60,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "/master/jabatan/json",
+                url: "/master/karyawan/json",
                 dataSrc: function (res) {
                     if (res.code == 5500) {
                         return InternalServerEror()
@@ -76,15 +80,21 @@
                     searchable: false
                 },
                 {
-                    "data": "kode_jabatan"
+                    "data": "employee_code"
                 },
                 {
-                    "data": "name"
+                    "data": "employee_name"
+                },
+                {
+                    "data": "jabatan_name"
+                },
+                {
+                    "data": "divisi_name"
                 },
             ],
             columnDefs: [
                 {
-                    targets: 3,
+                    targets: 5,
                     render: function (data, type, row, meta) {
                         var button = `
 
@@ -109,7 +119,7 @@
                 showLoaderOnConfirm: true,
                 preConfirm: () => {
                     return $.ajax({
-                        url: "/master/jabatan/delete/" + id + "/json",
+                        url: "/master/karyawan/delete/" + id + "/json",
                     }).then((res) => {
                         return res
                     }).catch((err) => {

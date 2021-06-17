@@ -21,6 +21,12 @@
                 <li class="submenu-item ">
                     <a href="/master/jabatan">Jabatan</a>
                 </li>
+                <li class="submenu-item ">
+                    <a href="/master/karyawan">Karyawan</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="/master/salary">Gaji Karyawan</a>
+                </li>
             </ul>
         </li>
 

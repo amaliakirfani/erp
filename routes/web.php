@@ -35,6 +35,27 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function 
             Route::get('/', 'JabatanController@index');
             Route::get('/json', 'JabatanController@indexJson');
             Route::post('/create/json', 'JabatanController@createJson');
+            Route::get('/edit/{id}/json', 'JabatanController@editJson');
+            Route::post('/update/json', 'JabatanController@updateJson');
+            Route::get('/delete/{id}/json', 'JabatanController@deleteJson');
+        });
+
+        Route::group(['prefix' => '/karyawan'], function () {
+            Route::get('/', 'KaryawanController@index');
+            Route::get('/json', 'KaryawanController@indexJson');
+            Route::post('/create/json', 'KaryawanController@createJson');
+            Route::get('/edit/{id}/json', 'KaryawanController@editJson');
+            Route::post('/update/json', 'KaryawanController@updateJson');
+            Route::get('/delete/{id}/json', 'KaryawanController@deleteJson');
+        });
+
+        Route::group(['prefix' => '/salary'], function () {
+            Route::get('/', 'SalaryController@index');
+            Route::get('/json', 'SalaryController@indexJson');
+            Route::post('/create/json', 'SalaryController@createJson');
+            Route::get('/edit/{id}/json', 'SalaryController@editJson');
+            Route::post('/update/json', 'SalaryController@updateJson');
+            Route::get('/delete/{id}/json', 'SalaryController@deleteJson');
         });
     });
 });

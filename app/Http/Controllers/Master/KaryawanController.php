@@ -4,34 +4,45 @@ namespace App\Http\Controllers\Master;
 
 use App\Helpers\CodeRepo;
 use App\Http\Controllers\Controller;
+use App\Models\Master\Karyawan;
 use App\Models\Master\Jabatan;
+use App\Models\Master\Divisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use DataTables;
 
-class JabatanController extends Controller
+class KaryawanController extends Controller
 {
     function __construct()
     {
-        $this->view = 'pages.master.jabatan.';
+        $this->view = 'pages.master.karyawan.';
     }
 
     function index()
     {
+        $jabatan = Jabatan::get();
+        $divisi = Divisi::get();
         try {
             $data = [
-                "heading" => "Master Jabatan",
-                "title" => "Master Jabatan",
+                "heading" => "Master Karyawan",
+                "title" => "Master Karyawan",
+                "jabatan" => $jabatan,
+                "divisi" => $divisi,
             ];
             return view($this->view . 'index', $data);
         } catch (\Throwable $err) {
             return redirect()->back()->with("error", $err->getMessage());
         }
+
     }
 
     function indexJson()
     {
         try {
-            $model = Jabatan::get();
+            $model = Karyawan::join('master_jabatan','master_karyawan.position_id', '=', 'master_jabatan.id')
+                    ->join('master_divisi','master_karyawan.division_id', '=', 'master_divisi.id')
+                    ->select('master_karyawan.*','master_jabatan.name as jabatan_name', 'master_divisi.name as divisi_name')
+                    ->get();
             $data = DataTables::of($model)
                 ->addIndexColumn()
                 ->make(true);
@@ -47,10 +58,22 @@ class JabatanController extends Controller
     function createJson(Request $request)
     {
         try {
-            $data = $request->except(["_token"]);
-            $code = CodeRepo::masterJabatanCode();
-            $data['kode_jabatan'] = $code;
-            Jabatan::create($data);
+            // $data = $request->except(["_token"]);
+            $code = CodeRepo::masterKaryawanCode();
+            $employee_name = $request->input('employee_name');
+            $division_id = $request->input('division_id');
+            $position_id = $request->input('position_id');
+
+            Karyawan::create(
+                ['employee_code' => $code,
+                'employee_name' => $employee_name,
+                'division_id' => $division_id,
+                'position_id' => $position_id]
+            );
+
+            // $code = CodeRepo::masterKaryawanCode();
+            // $data['kode_karyawan'] = $code;
+            // Karyawan::create($data);
 
             return response()->json([
                 "code" => 2200,
@@ -67,7 +90,7 @@ class JabatanController extends Controller
     function editJson($id)
     {
         try {
-            $data = Jabatan::where("id", $id)->first();
+            $data = Karyawan::where("id", $id)->first();
             return response()->json([
                 "code" => 2200,
                 "message" => 'success',
@@ -86,7 +109,7 @@ class JabatanController extends Controller
         try {
             $data = $request->except(["_token", "id"]);
 
-            Jabatan::where("id", $request->id)->update($data);
+            Karyawan::where("id", $request->id)->update($data);
 
             return response()->json([
                 "code" => 2200,
@@ -100,9 +123,10 @@ class JabatanController extends Controller
         }
     }
 
-    function deleteJson($id) {
+    function deleteJson($id)
+    {
         try {
-            Jabatan::where("id", $id)->delete();
+            Karyawan::where("id", $id)->delete();
 
             return response()->json([
                 "code" => 2200,
