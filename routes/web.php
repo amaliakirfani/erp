@@ -58,4 +58,16 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function 
             Route::get('/delete/{id}/json', 'SalaryController@deleteJson');
         });
     });
+
+    Route::group(['prefix' => '/attendance'], function () {
+        Route::get('/', 'AttendanceController@index');
+        Route::get('/json', 'AttendanceController@indexJson');
+        Route::post('/create/json', 'AttendanceController@createJson');
+    });
+
+    Route::group(['prefix' => '/salaries'], function () {
+        Route::get('/', 'SalariesController@index');
+        Route::get('/json', 'SalariesController@indexJson');
+        Route::post('/detail/json', 'SalariesController@detailJson');
+    });
 });

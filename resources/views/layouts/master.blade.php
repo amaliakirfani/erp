@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ERP | @yield('title')</title>
+    <title> ERP - Perusahaan Kontraktor | @yield('title')</title>
 
     @include("layouts.global_css")
     @include('layouts.components.loader')
@@ -18,7 +18,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo">
-                        <a href="index.html"><img src="/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                        <a href="index.html"><img src="/assets/images/logo/logo-erp.png" alt="Logo" style="width:100px;height:100px;" srcset=""></a>
                     </div>
                     <div class="toggler">
                         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -63,11 +63,11 @@
         <footer>
             <div class="footer clearfix mb-0 text-muted">
                 <div class="float-start">
-                    <p>2021 &copy; Mazer</p>
+                    <p>2021 &copy; Sistem Absensi dan Penggajian Karyawan</p>
                 </div>
                 <div class="float-end">
                     <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                            href="http://ahmadsaugi.com">A. Saugi</a></p>
+                            href="http://ahmadsaugi.com">Amalia K.I</a></p>
                 </div>
             </div>
         </footer>

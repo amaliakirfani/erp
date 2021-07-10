@@ -58,7 +58,6 @@ class KaryawanController extends Controller
     function createJson(Request $request)
     {
         try {
-            // $data = $request->except(["_token"]);
             $code = CodeRepo::masterKaryawanCode();
             $employee_name = $request->input('employee_name');
             $division_id = $request->input('division_id');
@@ -70,10 +69,6 @@ class KaryawanController extends Controller
                 'division_id' => $division_id,
                 'position_id' => $position_id]
             );
-
-            // $code = CodeRepo::masterKaryawanCode();
-            // $data['kode_karyawan'] = $code;
-            // Karyawan::create($data);
 
             return response()->json([
                 "code" => 2200,

@@ -25,11 +25,23 @@
                     <a href="/master/karyawan">Karyawan</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="/master/salary">Gaji Karyawan</a>
+                    <a href="/master/salary">Gaji</a>
                 </li>
             </ul>
         </li>
 
+        <li class="sidebar-item">
+            <a href="/attendance" class='sidebar-link'>
+                <i class="bi bi-person-badge-fill"></i>
+                <span>Absensi Karyawan</span>
+            </a>
+        </li>
 
+        <li class="sidebar-item">
+            <a href="/salaries" class='sidebar-link'>
+                <i class="bi bi-cash"></i>
+                <span>Penggajian Karyawan</span>
+            </a>
+        </li>
     </ul>
 </div>
