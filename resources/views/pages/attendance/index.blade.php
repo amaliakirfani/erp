@@ -10,12 +10,6 @@
                     <div class="card-header">
                         <h4 class="card-title">{{$title}}</h4>
                     </div>
-                    <div class="card-body">
-                        <button onclick="openModalAdd()" type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modal-add">
-                            Tambah
-                        </button>
-                    </div>
                     <div class="card-content">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -41,16 +35,11 @@
         </div>
     </section>
 
-    @include("pages.attendance.components.modal-add")
 @endsection
 
 @push("js")
     @include('layouts.plugins.datatables')
     <script>
-
-        openModalAdd = () => {
-            $('#modal-add').modal('show')
-        }
 
         var table = $('#data-table').DataTable({
             pageLength: 10,

@@ -32,17 +32,34 @@ class SalariesController extends Controller
         }
     }
 
-    function indexJson()
+    function indexJson(Request $request )
     {
         try {
             $month = $request->month;
             $year = $request->year;
+            // $month=06;
+            // $year=2021;
+
             $model = Attendance::join('master_karyawan','attendance.employee_code', '=', 'master_karyawan.employee_code')
-            ->join('master_salary','attendance.employee_code', '=', 'master_salary.employee_code')
-            ->select('attendance.*','master_karyawan.employee_code', sum('master_salary.sallary_per_hour as total_gaji'))
-            ->whereMonth('date', '=', $month)
-            ->whereYear('date', '=', $year)
+            ->join('master_salary','master_karyawan.master_salary_id', '=', 'master_salary.id')
+            ->selectRaw("master_karyawan.employee_code,master_karyawan.employee_name, extract (month from attendance.date) as month,
+            TO_CHAR(attendance.date, 'Month') AS month_name,
+            extract (year from attendance.date) as year,
+            SUM(extract (hour from (case when attendance.time_out >= '17:00:00' then '17:00:00' else attendance.time_out end -attendance.time_in))) as th,
+            master_salary.sallary_per_hour,master_salary.sallary_overtime,master_salary.allowance,
+            SUM(case when attendance.time_out > '17:00:00' then extract (hour from (attendance.time_out-'17:00:00')) end ) as th_overtime,
+            COUNT(extract (month from date)) as t_days")
+            ->whereMonth('attendance.date', '=', $month)
+            ->whereYear('attendance.date', '=', $year)
+            ->groupByRaw("1,2,3,4,5,7,8,9")
             ->get();
+            foreach ($model as $v){
+                $v->t_salary_per_hour=$v->th*$v->sallary_per_hour;
+                $v->t_s_overtime=$v->th_overtime*$v->sallary_overtime;
+                $v->t_allowance=$v->allowance*$v->t_days;
+                $v->t_salary=$v->t_salary_per_hour+$v->t_s_overtime+$v->t_allowance;
+                $v->th=$v->th-$v->t_days;
+            }
             $data = DataTables::of($model)
                 ->addIndexColumn()
                 ->make(true);

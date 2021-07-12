@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Karyawan;
 use App\Models\Master\Jabatan;
 use App\Models\Master\Divisi;
+use App\Models\Master\Salary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
@@ -63,11 +64,23 @@ class KaryawanController extends Controller
             $division_id = $request->input('division_id');
             $position_id = $request->input('position_id');
 
+            $cek_data = Salary::select('*')
+            ->where('division_id', '=', $division_id)
+            ->where('position_id', '=', $position_id)
+            ->first();
+            if($cek_data == null ) {
+                return response()->json([
+                    "code"=>400,
+                    'message'=> "master salary tidak tersedia"
+                ]);
+            }
+
             Karyawan::create(
                 ['employee_code' => $code,
                 'employee_name' => $employee_name,
                 'division_id' => $division_id,
-                'position_id' => $position_id]
+                'position_id' => $position_id,
+                'master_salary_id' => $cek_data->id]
             );
 
             return response()->json([

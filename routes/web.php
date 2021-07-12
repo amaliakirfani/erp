@@ -71,3 +71,7 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function 
         Route::post('/detail/json', 'SalariesController@detailJson');
     });
 });
+
+Route::group(['namespace' => 'Frontend'], function () {
+    Route::get('/absensi', 'AbsensiController@index');
+});

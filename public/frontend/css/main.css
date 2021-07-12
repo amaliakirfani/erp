@@ -1,0 +1,274 @@
+body{
+    font-family: 'Quicksand';
+    /* background image */
+    background-image: url('../img/bg-image.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: auto;
+}
+
+@media (min-width: 1200px) {
+    .container {
+      width: 1024px;
+    }
+  }
+
+.garis{
+    height: 2px;
+    color: violet;
+    background-color: yellowgreen;
+}
+
+/* HEADER */
+
+@media (min-width: 1200px) {
+    .header-siswa-b {
+      width: 768px;
+    }
+  }
+  
+.login ::placeholder {
+    font-size: small;
+    text-align: center;
+  }
+
+/* .w-1024{
+    width: 1024px;
+} */
+
+/* text line heigy */
+.lh-16{
+    line-height: 16px;
+}
+
+/* text style color */
+.text-black{
+    color: #505050;
+}
+
+.text-orange{
+    color: #F69522;
+}
+
+.text-blue{
+    color: #086DBF;
+}
+
+.text-biru-terang{
+    color: #007FD8;
+}
+
+/* button style color */
+.btn-orange{
+    background-color:#F69522;
+    color : white;
+}
+
+.btn-biru-terang{
+    background-color: #007FD8;
+    color: white;
+}
+
+/* button red */
+.btn-red{
+    background-color: #FF0204;
+    color: white;
+}
+
+/* button green */
+.btn-green{
+    background-color: #0BD002;
+    color: white;
+}
+
+
+.btn-blue{
+    background-color: #013356;
+    color:white;
+}
+
+/* background */
+.bg-biru-terang{
+    background-color: #007FD8;
+    color: white;
+}
+
+.bg-orange{
+    background-color: #F69522;
+    color: white;
+}
+
+.bg-white-t-orange{
+    background-color: white;
+    color: #F69522;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+/* border-biru terang 1px */
+.b-biru-terang-1{
+    border: 1px solid #007FD8;
+}
+
+/* table border orange */
+.tb-orange{
+    border: 1px solid #F69522;
+}
+
+/* font weight style  */
+.f-500{
+    font-weight: 500;
+}
+
+/* font size style */
+.fst-16{
+    font-size: 14px;
+}
+/* siswa */
+
+/* PAGE LOGIN */
+
+@media (min-width: 1024px) {
+    .menu-button {
+      width: 300px;
+    }
+  }
+
+
+.menu-button-logout{
+    width: 200px;
+}
+
+/* menu button */  
+
+/* PAGE ATTENDANCE */
+/* card rfid */
+.card-rfid{
+    border: solid 2px #007FD8 ;
+}
+
+@media (min-width: 1024px) {
+    .card-rfid {
+      width: 400px;
+    }
+  }
+
+
+.data-medical-detail{
+    width: 400px;
+}
+
+
+/* PAGE LOGIN */
+.siswa-login input:focus::placeholder {
+    color: transparent;
+}
+
+.siswa-login .form-control:focus {
+    border-color: #013356;
+    box-shadow: none;
+}
+
+.siswa-login .form-control {
+    border-color: #013356;
+}
+
+@media (max-width: 768px) {
+    .siswa-login .left{
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .siswa-login .right{
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .siswa-login .mobile{
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+}
+
+
+
+/* PAGE DETAIL MEDICAL */
+@media (min-width: 768px) {
+    .table-detail{
+        width: 500px;
+    }
+}
+
+/* PAGE REGISTER */
+.panduan{
+    height: 50%;
+}
+
+/* PAGE ATTEND */
+.table-attend{
+    border: 1px solid red !important;
+}
+
+
+/* PENGAJAR */
+
+/* .teacher-option{ */
+    /* width: 400px; */
+/* } */
+
+.checkin {
+    background-color: #2BE100;
+    border: 5px solid black;
+    border-radius: 5px;
+}
+
+.checkin h2{
+    color: white;
+}
+
+.checkout {
+    background-color: #FF0204;
+    border: 5px solid black;
+    border-radius: 5px;
+}
+
+.checkout h2{
+    color: white;
+}
+
+/* REGISTER */
+
+/* change color border */
+
+
+/* violation border color */
+
+/* CHECK */
+.card-check{
+    border: solid 2px #F69522 ;
+}
+
+@media (min-width: 1024px) {
+    .card-check {
+      width: 400px;
+    }
+  }
