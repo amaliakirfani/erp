@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function () {
     Route::get("/", 'HomeController@index');
 
+    // untuk frontend
+    Route::get('/absensi', 'AbsensiController@index');
+    Route::get('/check_id', 'AbsensiController@checkId');
+
     Route::group(['prefix' => '/master','namespace' => 'Master'], function () {
         Route::group(['prefix' => '/divisi'], function () {
             Route::get('/', 'DivisiController@index');
@@ -69,9 +73,11 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function 
         Route::get('/', 'SalariesController@index');
         Route::get('/json', 'SalariesController@indexJson');
         Route::post('/detail/json', 'SalariesController@detailJson');
+        Route::get('/slip_pdf', 'SalariesController@slip_pdf');
     });
 });
 
-Route::group(['namespace' => 'Frontend'], function () {
-    Route::get('/absensi', 'AbsensiController@index');
-});
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

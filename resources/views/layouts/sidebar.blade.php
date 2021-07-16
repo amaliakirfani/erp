@@ -12,7 +12,7 @@
         <li class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-stack"></i>
-                <span>Master</span>
+                <span>Human Resource</span>
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
@@ -33,14 +33,22 @@
         <li class="sidebar-item">
             <a href="/attendance" class='sidebar-link'>
                 <i class="bi bi-person-badge-fill"></i>
-                <span>Absensi Karyawan</span>
+                <span>Absensi</span>
             </a>
         </li>
 
         <li class="sidebar-item">
             <a href="/salaries" class='sidebar-link'>
                 <i class="bi bi-cash"></i>
-                <span>Penggajian Karyawan</span>
+                <span>Finance</span>
+            </a>
+        </li>
+
+        <br>
+        <li class="sidebar-item">
+            <a href="/" class='sidebar-link'>
+                <i class="bi bi-door-closed-fill"></i> Logout
+                  <span class="float-right text-muted text-sm"></span>
             </a>
         </li>
     </ul>

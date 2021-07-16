@@ -68,11 +68,11 @@
                                         <th>Bulan</th>
                                         <th>Tahun</th>
                                         <th>Total Hari Kerja</th>
-                                        <th>Total Working Hours</th>
-                                        <th>Total Overtime</th>
-                                        <th>Total Allowance</th>
-                                        <th>Total Overtime</th>
-                                        <th>Total Gaji</th>
+                                        <th>Total Jam Kerja</th>
+                                        <th>Total Jam Lembur</th>
+                                        <th>Total Tunjangan</th>
+                                        <th>Total Gaji Lembur</th>
+                                        <th>Total Gaji Keseluruhan</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -88,7 +88,6 @@
         </div>
     </section>
 
-    @include("pages.attendance.components.modal-add")
 @endsection
 
 @push("js")
@@ -189,19 +188,15 @@
             ],
             columnDefs: [
                 {
-                    targets: 4,
-                    // render: function (data, type, row, meta) {
-                    //     var button = `
+                    targets: 11,
+                    render: function (data, type, row, meta) {
+                        var button = `
 
-                    // <button onclick="editData('` + row.id + `')" class="btn btn-sm btn-warning">
-                    // <i class="fa fa-edit"></i>
-                    // Edit</button>
-                    // <button onclick="deleteData('` + row.id + `')" class="btn btn-sm btn-danger">
-                    // <i class="fa fa-trash"></i>
-                    // Delete</button>
-                    // `
-                    //     return button
-                    // }
+                    <a class="btn btn-sm btn-danger float-left" href="/salaries/slip_pdf?month=${$('#month').val()}&year=${$('#year').val()}&employee_code=${row.employee_code}" class="btn btn-primary"
+                    target="_blank">Cetak PDF</a>
+                    `
+                        return button
+                    }
                 },],
         });
 
