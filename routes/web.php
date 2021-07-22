@@ -17,67 +17,68 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function () {
+        Route::get("/", 'HomeController@index');
 
-Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function () {
-    Route::get("/", 'HomeController@index');
+            Route::group(['prefix' => '/master','namespace' => 'Master'], function () {
+                Route::group(['prefix' => '/divisi'], function () {
+                    Route::get('/', 'DivisiController@index');
+                    Route::get('/json', 'DivisiController@indexJson');
+                    Route::post('/create/json', 'DivisiController@createJson');
+                    Route::get('/edit/{id}/json', 'DivisiController@editJson');
+                    Route::post('/update/json', 'DivisiController@updateJson');
+                    Route::get('/delete/{id}/json', 'DivisiController@deleteJson');
+                });
 
-    // untuk frontend
-    Route::get('/absensi', 'AbsensiController@index');
-    Route::get('/check_id', 'AbsensiController@checkId');
+                Route::group(['prefix' => '/jabatan'], function () {
+                    Route::get('/', 'JabatanController@index');
+                    Route::get('/json', 'JabatanController@indexJson');
+                    Route::post('/create/json', 'JabatanController@createJson');
+                    Route::get('/edit/{id}/json', 'JabatanController@editJson');
+                    Route::post('/update/json', 'JabatanController@updateJson');
+                    Route::get('/delete/{id}/json', 'JabatanController@deleteJson');
+                });
 
-    Route::group(['prefix' => '/master','namespace' => 'Master'], function () {
-        Route::group(['prefix' => '/divisi'], function () {
-            Route::get('/', 'DivisiController@index');
-            Route::get('/json', 'DivisiController@indexJson');
-            Route::post('/create/json', 'DivisiController@createJson');
-            Route::get('/edit/{id}/json', 'DivisiController@editJson');
-            Route::post('/update/json', 'DivisiController@updateJson');
-            Route::get('/delete/{id}/json', 'DivisiController@deleteJson');
+                Route::group(['prefix' => '/karyawan'], function () {
+                    Route::get('/', 'KaryawanController@index');
+                    Route::get('/json', 'KaryawanController@indexJson');
+                    Route::post('/create/json', 'KaryawanController@createJson');
+                    Route::get('/edit/{id}/json', 'KaryawanController@editJson');
+                    Route::post('/update/json', 'KaryawanController@updateJson');
+                    Route::get('/delete/{id}/json', 'KaryawanController@deleteJson');
+                });
+
+                Route::group(['prefix' => '/salary'], function () {
+                    Route::get('/', 'SalaryController@index');
+                    Route::get('/json', 'SalaryController@indexJson');
+                    Route::post('/create/json', 'SalaryController@createJson');
+                    Route::get('/edit/{id}/json', 'SalaryController@editJson');
+                    Route::post('/update/json', 'SalaryController@updateJson');
+                    Route::get('/delete/{id}/json', 'SalaryController@deleteJson');
+                });
+            });
+
+            Route::group(['prefix' => '/attendance'], function () {
+                Route::get('/', 'AttendanceController@index');
+                Route::get('/json', 'AttendanceController@indexJson');
+                Route::post('/create/json', 'AttendanceController@createJson');
+            });
+
+            Route::group(['prefix' => '/salaries'], function () {
+                Route::get('/', 'SalariesController@index');
+                Route::get('/json', 'SalariesController@indexJson');
+                Route::post('/detail/json', 'SalariesController@detailJson');
+                Route::get('/slip_pdf', 'SalariesController@slip_pdf');
+            });
         });
-
-        Route::group(['prefix' => '/jabatan'], function () {
-            Route::get('/', 'JabatanController@index');
-            Route::get('/json', 'JabatanController@indexJson');
-            Route::post('/create/json', 'JabatanController@createJson');
-            Route::get('/edit/{id}/json', 'JabatanController@editJson');
-            Route::post('/update/json', 'JabatanController@updateJson');
-            Route::get('/delete/{id}/json', 'JabatanController@deleteJson');
-        });
-
-        Route::group(['prefix' => '/karyawan'], function () {
-            Route::get('/', 'KaryawanController@index');
-            Route::get('/json', 'KaryawanController@indexJson');
-            Route::post('/create/json', 'KaryawanController@createJson');
-            Route::get('/edit/{id}/json', 'KaryawanController@editJson');
-            Route::post('/update/json', 'KaryawanController@updateJson');
-            Route::get('/delete/{id}/json', 'KaryawanController@deleteJson');
-        });
-
-        Route::group(['prefix' => '/salary'], function () {
-            Route::get('/', 'SalaryController@index');
-            Route::get('/json', 'SalaryController@indexJson');
-            Route::post('/create/json', 'SalaryController@createJson');
-            Route::get('/edit/{id}/json', 'SalaryController@editJson');
-            Route::post('/update/json', 'SalaryController@updateJson');
-            Route::get('/delete/{id}/json', 'SalaryController@deleteJson');
-        });
-    });
-
-    Route::group(['prefix' => '/attendance'], function () {
-        Route::get('/', 'AttendanceController@index');
-        Route::get('/json', 'AttendanceController@indexJson');
-        Route::post('/create/json', 'AttendanceController@createJson');
-    });
-
-    Route::group(['prefix' => '/salaries'], function () {
-        Route::get('/', 'SalariesController@index');
-        Route::get('/json', 'SalariesController@indexJson');
-        Route::post('/detail/json', 'SalariesController@detailJson');
-        Route::get('/slip_pdf', 'SalariesController@slip_pdf');
-    });
 });
-
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers'], function () {
+    // untuk frontend
+    Route::get('/absensi', 'AbsensiController@index');
+    Route::get('/check_id', 'AbsensiController@checkId');
+});

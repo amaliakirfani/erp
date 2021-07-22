@@ -44,12 +44,21 @@
             </a>
         </li>
 
-        <br>
         <li class="sidebar-item">
-            <a href="/" class='sidebar-link'>
+            {{-- <a href="/" class='sidebar-link'>
                 <i class="bi bi-door-closed-fill"></i> Logout
                   <span class="float-right text-muted text-sm"></span>
+            </a> --}}
+
+            <a class='sidebar-link' href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+             {{ __('Logout') }}
             </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </li>
     </ul>
 </div>

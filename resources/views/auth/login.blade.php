@@ -18,10 +18,11 @@
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
-                    <div class="auth-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-erp.png" alt="Logo"></a>
-                    </div>
-
+                    {{-- <div class="auth-logo"> --}}
+                        <a href="#"><img src="assets/images/logo/login_erp.jpg" alt="Logo" style="width:500px;height:250px;"></a>
+                    {{-- </div> --}}
+                    <br>
+                    <br>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -48,7 +49,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">{{ __('Login') }}</button>
                     </form>
                 </div>
             </div>

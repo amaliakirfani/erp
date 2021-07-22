@@ -97,20 +97,22 @@
 <!-- Mirrored from elmanawy.info/demo/ariel/ltr/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2021 12:57:29 GMT -->
 <script>
 
-        // function checkId(data, callback) {
-        //     $.ajax({
-        //         url: "/vote",
-        //         type: "GET",
-        //         data: {
-        //             "organization": data.organization,
-        //             "type": "json",
-        //             "team_code": data.team_code,
-        //         },
-        //         success: function (res) {
-        //             return callback(res)
-        //         },
-        //     });
-        // }
+        function checkId(check_rfid, callback) {
+            $.ajax({
+                url: "/check_id",
+                type: "GET",
+                data: {
+                    "organization": check_rfid,
+                    "type": "json",
+                },
+                success: function (res) {
+                    return callback(res)
+                },
+            });
+        }
 
+        $(document).ready(function () {
+            checkId()
+        })
 </script>
 </html>
