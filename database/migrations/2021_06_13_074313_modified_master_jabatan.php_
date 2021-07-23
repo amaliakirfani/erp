@@ -14,8 +14,8 @@ class ModifiedMasterJabatan extends Migration
     public function up()
     {
         Schema::table('master_jabatan', function (Blueprint $table) {
-            $table->string('kode_jabatan')->unique();
-            $table->string('name')->nullable();
+            $table->string('kode_jabatan')->unique()->change();
+            $table->string('name')->nullable()->change();
         });
     }
 
