@@ -44,7 +44,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 start-home-content">
-                    <h1>Silahkan Lakukan Absensi!</h1>
+                    <h1>Silahkan Tap Kartu Anda untuk Melakukan Absen!</h1>
                     <form class="newsletter-form">
                         <input type="text" class="form-control" id="rfid" placeholder="Ini adalah ID Anda" disabled/>
                         <button class="btn theme-btn">ID Anda</button>

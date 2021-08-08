@@ -70,6 +70,7 @@
                                         <th>Total Hari Kerja</th>
                                         <th>Total Jam Kerja</th>
                                         <th>Total Jam Lembur</th>
+                                        <th>Total Gaji Pokok</th>
                                         <th>Total Tunjangan</th>
                                         <th>Total Gaji Lembur</th>
                                         <th>Total Gaji Keseluruhan</th>
@@ -177,18 +178,21 @@
                     "data":"th_overtime"
                 },
                 {
-                    "data": "t_allowance"
+                    "data":"t_salary_per_hour", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
                 },
                 {
-                    "data":"t_s_overtime"
+                    "data": "t_allowance", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
                 },
                 {
-                    "data": "t_salary"
+                    "data":"t_s_overtime", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
+                },
+                {
+                    "data": "t_salary", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
                 },
             ],
             columnDefs: [
                 {
-                    targets: 11,
+                    targets: 12,
                     render: function (data, type, row, meta) {
                         var button = `
 

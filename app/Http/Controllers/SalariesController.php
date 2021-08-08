@@ -38,8 +38,6 @@ class SalariesController extends Controller
         try {
             $month = $request->month;
             $year = $request->year;
-            // $month=06;
-            // $year=2021;
 
             $model = Attendance::join('master_karyawan','attendance.employee_code', '=', 'master_karyawan.employee_code')
             ->join('master_salary','master_karyawan.master_salary_id', '=', 'master_salary.id')
@@ -55,11 +53,11 @@ class SalariesController extends Controller
             ->groupByRaw("1,2,3,4,5,7,8,9")
             ->get();
             foreach ($model as $v){
+                $v->th=$v->th-$v->t_days;
                 $v->t_salary_per_hour=$v->th*$v->sallary_per_hour;
                 $v->t_s_overtime=$v->th_overtime*$v->sallary_overtime;
                 $v->t_allowance=$v->allowance*$v->t_days;
                 $v->t_salary=$v->t_salary_per_hour+$v->t_s_overtime+$v->t_allowance;
-                $v->th=$v->th-$v->t_days;
             }
             $data = DataTables::of($model)
                 ->addIndexColumn()

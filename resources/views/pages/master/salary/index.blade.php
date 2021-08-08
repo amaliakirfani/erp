@@ -87,13 +87,13 @@
                     "data": "divisi_name"
                 },
                 {
-                    "data": "sallary_per_hour"
+                    "data": "sallary_per_hour", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
                 },
                 {
-                    "data": "sallary_overtime"
+                    "data": "sallary_overtime", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
                 },
                 {
-                    "data": "allowance"
+                    "data": "allowance", render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp' )
                 },
             ],
             columnDefs: [
